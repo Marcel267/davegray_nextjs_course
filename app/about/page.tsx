@@ -4,8 +4,8 @@ import React from "react";
 export default function About() {
   return (
     <>
-      <div>About</div>
-      <Link href={"/"}>Home Link</Link>
+      <h1 className="text-3xl">About</h1>
+      <Link href={"/"}>⬅️ Back to home</Link>
     </>
   );
 }
