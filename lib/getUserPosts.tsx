@@ -3,8 +3,7 @@ export default async function getUserPosts(userId: string) {
     `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
   );
 
-  if (!res) {
-    throw new Error("Failed to fetch user");
-  }
+  if (!res) return undefined;
+
   return res.json();
 }

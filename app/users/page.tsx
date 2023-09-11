@@ -21,12 +21,10 @@ export default async function Users() {
       <br />
       {users.map((user) => {
         return (
-          <>
-            <p key={user.id}>
-              <Link href={`users/${user.id}`}>{user.name}</Link>
-            </p>
+          <div key={user.id}>
+            <Link href={`users/${user.id}`}>{user.name}</Link>
             <br />
-          </>
+          </div>
         );
       })}
     </section>
