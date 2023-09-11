@@ -4,7 +4,9 @@ import React, { Suspense } from "react";
 import UserPosts from "./components/UserPosts";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { userInfo } from "os";
+import getAllUsers from "@/lib/getAllUsers";
+
+import { notFound } from "next/navigation";
 
 type Params = {
   params: {
@@ -28,8 +30,8 @@ export default async function UserPage({ params: { userId } }: Params) {
   const userData: Promise<User> = getUser(userId);
   const userPostsData: Promise<Post[]> = getUserPosts(userId);
 
-  //entweder so, oder wie in Zeile 26 promise als prop übergeben und UserPosts resolven
-  //   const [user, userPosts] = await Promise.all([userData, userPostsData]);
+  //  entweder so, oder wie unten promise als prop übergeben und in UserPosts resolven
+  //  const [user, userPosts] = await Promise.all([userData, userPostsData]);
 
   const user = await userData;
 
@@ -43,4 +45,13 @@ export default async function UserPage({ params: { userId } }: Params) {
       </Suspense>
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const usersData: Promise<User[]> = getAllUsers();
+  const users = await usersData;
+
+  return users.map((user) => ({
+    userId: user.id.toString(),
+  }));
 }
