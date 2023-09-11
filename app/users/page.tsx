@@ -21,9 +21,8 @@ export default async function Users() {
       <br />
       {users.map((user) => {
         return (
-          <div key={user.id}>
+          <div key={user.id} className="mt-5">
             <Link href={`users/${user.id}`}>{user.name}</Link>
-            <br />
           </div>
         );
       })}
